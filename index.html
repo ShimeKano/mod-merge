@@ -25,10 +25,11 @@
     document.head.appendChild(script);
   }
   function loadApp(){
-    const script=document.createElement("script");script.src="./app.js";script.defer=true;
-    script.onerror=function(){const box=document.getElementById("startup-error");if(box){box.hidden=false;box.textContent="Không tải được app.js. Kiểm tra Pages publishing folder, đường dẫn file và deployment mới nhất.";}};
-    document.head.appendChild(script);
+    const merger=document.createElement("script");merger.src="./bedrock-merger.js";
+    merger.onload=function(){const script=document.createElement("script");script.src="./app.js";script.onerror=function(){showError("Không tải được app.js.");};document.head.appendChild(script);};
+    merger.onerror=function(){showError("Không tải được bedrock-merger.js.");};document.head.appendChild(merger);
   }
+  function showError(message){const box=document.getElementById("startup-error");if(box){box.hidden=false;box.textContent=message;}}
   window.addEventListener("DOMContentLoaded",function(){load(0);});
 })();
 </script>

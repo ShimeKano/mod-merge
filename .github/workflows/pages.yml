@@ -21,11 +21,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js for merger tests
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Bedrock merger tests
+        run: node --test tests/bedrock-merger.test.js
+
       - name: Verify static site entry point
         run: |
           test -f index.html
           test -f styles.css
           test -f app.js
+          test -f bedrock-merger.js
+          test -f tests/bedrock-merger.test.js
           test -f diagnostics.html
           test -f 404.html
           echo "Static site files found."
