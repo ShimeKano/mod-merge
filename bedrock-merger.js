@@ -83,4 +83,5 @@ async function merge(files,JSZip){
  return {blob:await out.generateAsync({type:"blob"}),kind:packs[0].kind,packCount:packs.length,fileCount:content.size,dependencies:manifest.dependencies.length,moduleCount:manifest.modules.length};
 }
 root.ModMergeBedrock={merge,_test:{classifyManifest,normalizePath,mergeManifestMetadata}};
+if(typeof module!=="undefined"&&module.exports)module.exports=root.ModMergeBedrock;
 })(typeof globalThis!=="undefined"?globalThis:window);
